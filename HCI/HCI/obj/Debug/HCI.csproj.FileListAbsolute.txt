@@ -1,0 +1,10 @@
+D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\bin\Debug\HCI.exe.config
+D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\bin\Debug\HCI.exe
+D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\bin\Debug\HCI.pdb
+D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.AssemblyReference.cache
+D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.SuggestedBindingRedirects.cache
+D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.Properties.Resources.resources
+D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.GenerateResource.cache
+D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.CoreCompileInputs.cache
+D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.exe
+D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.pdb
