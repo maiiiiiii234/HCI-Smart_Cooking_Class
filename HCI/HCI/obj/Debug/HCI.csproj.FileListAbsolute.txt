@@ -8,3 +8,13 @@ D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.GenerateReso
 D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.CoreCompileInputs.cache
 D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.exe
 D:\HCI_Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.pdb
+C:\Users\dell2\Desktop\HCI ( cooking )\HCI-Smart_Cooking_Class\HCI\HCI\bin\Debug\HCI.exe.config
+C:\Users\dell2\Desktop\HCI ( cooking )\HCI-Smart_Cooking_Class\HCI\HCI\bin\Debug\HCI.exe
+C:\Users\dell2\Desktop\HCI ( cooking )\HCI-Smart_Cooking_Class\HCI\HCI\bin\Debug\HCI.pdb
+C:\Users\dell2\Desktop\HCI ( cooking )\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.AssemblyReference.cache
+C:\Users\dell2\Desktop\HCI ( cooking )\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.SuggestedBindingRedirects.cache
+C:\Users\dell2\Desktop\HCI ( cooking )\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.Properties.Resources.resources
+C:\Users\dell2\Desktop\HCI ( cooking )\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.GenerateResource.cache
+C:\Users\dell2\Desktop\HCI ( cooking )\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.CoreCompileInputs.cache
+C:\Users\dell2\Desktop\HCI ( cooking )\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.exe
+C:\Users\dell2\Desktop\HCI ( cooking )\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.pdb
