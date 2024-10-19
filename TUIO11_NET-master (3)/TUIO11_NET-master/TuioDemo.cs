@@ -26,7 +26,9 @@ using TUIO;
 		private int screen_height = Screen.PrimaryScreen.Bounds.Height;
 	    public string objectImagePath;
 		public string backgroundImagePath;
-	    public int fire = -1;
+	    public int fire = -1 , fireID=0,KnifeID=1,ChickenID=2,chknflag=0;
+		public	TuioObject knifeObject;
+		public  TuioObject chickenObject;
 
 	    private bool fullscreen;
 		private bool verbose;
@@ -122,6 +124,9 @@ using TUIO;
 		}
 
 		public void updateTuioObject(TuioObject o) {
+
+		if(o.SymbolID==fireID)
+        { 
 		// Convert the angle from radians to degrees
 		double angleInDegrees = o.Angle * (180.0 / Math.PI);
 
@@ -151,8 +156,39 @@ using TUIO;
 				Console.WriteLine("Fire ON - Object rotated to the right (90 degrees)");
 			}
 		}
+		}
+
+	 	if (o.SymbolID == KnifeID) {
+              knifeObject = o;
+         }
+        if (o.SymbolID == ChickenID) {
+            chickenObject = o;
+        }
+     
+        if (knifeObject != null && chickenObject != null) {
+            checkKnifeSlicing(knifeObject, chickenObject);
+        }
+
 		if (verbose) Console.WriteLine("set obj "+o.SymbolID+" "+o.SessionID+" "+o.X+" "+o.Y+" "+o.Angle+" "+o.MotionSpeed+" "+o.RotationSpeed+" "+o.MotionAccel+" "+o.RotationAccel);
 		}
+	    public void checkKnifeSlicing(TuioObject knife, TuioObject chicken) {
+ 
+          float xrange = 0.05f; 
+          float yrange = 0.05f;
+
+        // slice vertically
+        if (Math.Abs(knife.X - chicken.X) < xrange) {
+
+            if ( Math.Abs(knife.Y - chicken.Y)<yrange) {
+                // Knife has "sliced" the chicken
+                Console.WriteLine("Chicken sliced!");
+	     			chknflag=1;
+                
+            }
+        }
+
+    }
+
 
 		public void removeTuioObject(TuioObject o) {
 			lock(objectList) {
@@ -206,8 +242,21 @@ using TUIO;
 		{
 			// Getting the graphics object
 			Graphics g = pevent.Graphics;
-			g.FillRectangle(bgrBrush, new Rectangle(0,0,width,height));
 
+			g.FillRectangle(bgrBrush, new Rectangle(0,0,width,height));
+			backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "kitback.jpg");
+		    // Draw background image without rotation
+			if (File.Exists(backgroundImagePath))
+			{
+				using (Image bgImage = Image.FromFile(backgroundImagePath))
+				{
+					g.DrawImage(bgImage, new Rectangle(new Point(0, 0), new Size(width, height)));
+				}
+			}
+			else
+			{
+				Console.WriteLine($"Background image not found: {backgroundImagePath}");
+			}
 			// draw the cursor path
 			if (cursorList.Count > 0) {
  			 lock(cursorList) {
@@ -236,16 +285,21 @@ using TUIO;
 					switch (tobj.SymbolID)
 					{
 						case 1:
-							objectImagePath = Path.Combine(Environment.CurrentDirectory, "firepic.png");
-							backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "kitback.jpg");
+							objectImagePath = Path.Combine(Environment.CurrentDirectory, "knife.jfif");
+
 							break;
 						case 2:
-							objectImagePath = Path.Combine(Environment.CurrentDirectory, "firepic.png");
-							backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "bg2.jpg");
+							if(chknflag==0)
+                            { 
+							objectImagePath = Path.Combine(Environment.CurrentDirectory, "chkn.jfif");
+							}
+                            else if(chknflag==1)
+                            {
+								objectImagePath = Path.Combine(Environment.CurrentDirectory, "slicedChkn.jfif");
+                            }
 							break;
 						case 0:
 						    objectImagePath = Path.Combine(Environment.CurrentDirectory, "firepic.png"); 
-							backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "kitback.jpg");
 							break;
                         default:
                             // Use default rectangle for other IDs
@@ -256,25 +310,14 @@ using TUIO;
 
 					try
 					{
-						// Draw background image without rotation
-						if (File.Exists(backgroundImagePath))
-						{
-							using (Image bgImage = Image.FromFile(backgroundImagePath))
-							{
-								g.DrawImage(bgImage, new Rectangle(new Point(0, 0), new Size(width, height)));
-							}
-						}
-						else
-						{
-							Console.WriteLine($"Background image not found: {backgroundImagePath}");
-						}
+
 
 						// Draw object image with rotation
 						if (File.Exists(objectImagePath) )
 						{
 							using (Image objectImage = Image.FromFile(objectImagePath))
 							{
-								if (fire == 1 && tobj.SymbolID==0)
+								if (fire == 1 && tobj.SymbolID==fireID)
 								{
 									// Save the current state of the graphics object
 									GraphicsState state = g.Save();
@@ -290,7 +333,7 @@ using TUIO;
 									// Restore the graphics state
 									g.Restore(state);
 								}
-                                else if(tobj.SymbolID != 0)
+                                else if(tobj.SymbolID != fireID)
 
                                 {
 									// Save the current state of the graphics object
