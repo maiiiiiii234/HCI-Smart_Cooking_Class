@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\HCI",
+    "\\HCI\\HCI"
   ],
-  "SelectedNode": "\\HCI.sln",
+  "SelectedNode": "\\HCI\\HCI.sln",
   "PreviewInSolutionExplorer": false
 }

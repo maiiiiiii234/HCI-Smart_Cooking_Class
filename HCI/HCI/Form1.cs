@@ -51,9 +51,6 @@ namespace HCI
         AinElbotagaz einElKbera = new AinElbotagaz();
 
 
-
-<<<<<<< HEAD
-=======
         public class AinElbotagaz
         {
             public int X, Y;
@@ -66,7 +63,7 @@ namespace HCI
             public int X, Y;
             public Bitmap img;
         }
->>>>>>> 039d78b8d97ced789c008a5a063f7399fc5fb0ca
+
         public Form1()
         {
             this.Load += Form1_Load;
@@ -187,7 +184,7 @@ namespace HCI
             // Draw a horizontal line dividing the screen into top and bottom halves
             g.DrawLine(pen, 0, height / 2, width, height / 2);
 
-<<<<<<< HEAD
+
 
            
             g.DrawImage(ta2leeb_ma3la2a.Image,ta2leeb_ma3la2a.X,ta2leeb_ma3la2a.Y,ta2leeb_ma3la2a.Width, ta2leeb_ma3la2a.Height);
@@ -211,10 +208,9 @@ namespace HCI
 
 
 
-=======
-            // Dispose of the pen
+
             pen.Dispose();
->>>>>>> 039d78b8d97ced789c008a5a063f7399fc5fb0ca
+
         }
 
         // The function responsible for double buffering
