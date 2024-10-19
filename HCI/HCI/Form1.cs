@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -42,7 +43,6 @@ namespace HCI
     }
     public partial class Form1 : Form
     {
-        //variables
         Bitmap off;
         bool isflame=false;
         Flame flameEinKbera = new Flame();
@@ -64,6 +64,25 @@ namespace HCI
             public Bitmap img;
         }
 
+       public class ingredients
+        {
+            // Properties
+            public Bitmap Image { get; set; }
+            public int X { get; set; }
+            public int Y { get; set; }
+            public int Width { get; set; }
+            public int Height { get; set; }
+
+            // Constructor to initialize the object
+            public ingredients(Bitmap image, int x, int y, int width, int height)
+            {
+                Image = image;
+                X = x;
+                Y = y;
+                Width = width;
+                Height = height;
+            }
+        }
         public Form1()
         {
             this.Load += Form1_Load;
@@ -71,10 +90,9 @@ namespace HCI
             Timer t = new Timer();
             t.Start();
             t.Tick += T_Tick;
-            this.MouseDown += Form1_MouseDown;
             this.WindowState = FormWindowState.Maximized;
+            this.MouseDown += Form1_MouseDown;
         }
-
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             if (!isflame)
@@ -103,13 +121,14 @@ namespace HCI
                 //flameEinSo8ayara.Y = this.Height - 305;
                 //flameEinSo8ayara.img = new Bitmap("flame2.png");
             }
-        }
+            off = new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
 
+        }
         private void T_Tick(object sender, EventArgs e)
         {
             Dubb(this.CreateGraphics());
+            Dubb(this.CreateGraphics());
         }
-
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Dubb(e.Graphics);
@@ -132,6 +151,7 @@ namespace HCI
         {
             g.Clear(Color.White);
             Bitmap bg = new Bitmap("marbleBG.png");
+            g.Clear(Color.Black);
             int width = this.ClientSize.Width;
             int height = this.ClientSize.Height;
             g.DrawImage(bg, 0, 0, width, height);
@@ -180,14 +200,35 @@ namespace HCI
 
             // Draw a vertical line dividing the screen into left and right halves
             g.DrawLine(pen, width / 2, 0, width / 2, height);
-
-            // Draw a horizontal line dividing the screen into top and bottom halves
             g.DrawLine(pen, 0, height / 2, width, height / 2);
+            ingredients milk = new ingredients(new Bitmap("milk.png"), 500, -70, 350, 650);
+            ingredients salt = new ingredients(new Bitmap("salt.png"), 560, 12, 100, 125);
+            ingredients pepper = new ingredients(new Bitmap("pepper-removebg-preview.png"), 660, 20, 50, 112);
+            ingredients oil = new ingredients(new Bitmap("oil.png"), 475, 20, 100, 112);
+            ingredients water = new ingredients(new Bitmap("water.png"), 495, 145, 100, 250);
+            ingredients taba2Top = new ingredients(new Bitmap("taba2.png"), 0, -25, 290, 270);
+            ingredients taba2Bottom = new ingredients(new Bitmap("taba2.png"), 0, 170, 290, 270);
+            ingredients pasta = new ingredients(new Bitmap("pasta.png"), 60, 35, 165, 165);
+            ingredients gebna = new ingredients(new Bitmap("gebna.png"), 70, 235, 150, 140);
+            ingredients taba2Bottomright = new ingredients(new Bitmap("taba2.png"), 200, 170, 290, 270);
+            ingredients taba2upright = new ingredients(new Bitmap("taba2.png"), 200, -25, 290, 270);
+            ingredients chicken = new ingredients(new Bitmap("chicken breast.png"), 245, 235, 200, 145);
+            ingredients butter = new ingredients(new Bitmap("butterbs.png"), 225, 7, 250, 185);
+            g.DrawImage(taba2Top.Image, taba2Top.X, taba2Top.Y, taba2Top.Width, taba2Top.Height);
+            g.DrawImage(taba2Bottom.Image, taba2Bottom.X, taba2Bottom.Y, taba2Bottom.Width, taba2Bottom.Height);
+            g.DrawImage(taba2upright.Image, taba2upright.X, taba2upright.Y, taba2upright.Width, taba2upright.Height);
+            g.DrawImage(taba2Bottomright.Image, taba2Bottomright.X, taba2Bottomright.Y, taba2Bottomright.Width, taba2Bottomright.Height);
+            g.DrawImage(pasta.Image, pasta.X, pasta.Y, pasta.Width, pasta.Height);
+            g.DrawImage(milk.Image, milk.X, milk.Y, milk.Width, milk.Height);
+            g.DrawImage(salt.Image, salt.X, salt.Y, salt.Width, salt.Height);
+            g.DrawImage(pepper.Image, pepper.X, pepper.Y, pepper.Width, pepper.Height);
+            g.DrawImage(chicken.Image, chicken.X, chicken.Y, chicken.Width, chicken.Height);
+            g.DrawImage(butter.Image, butter.X, butter.Y, butter.Width, butter.Height);
 
-
-
-           
-            g.DrawImage(ta2leeb_ma3la2a.Image,ta2leeb_ma3la2a.X,ta2leeb_ma3la2a.Y,ta2leeb_ma3la2a.Width, ta2leeb_ma3la2a.Height);
+            g.DrawImage(oil.Image, oil.X, oil.Y, oil.Width, oil.Height);
+            g.DrawImage(water.Image, water.X, water.Y, water.Width, water.Height);
+            g.DrawImage(gebna.Image, gebna.X, gebna.Y, gebna.Width, gebna.Height);
+            g.DrawImage(ta2leeb_ma3la2a.Image, ta2leeb_ma3la2a.X, ta2leeb_ma3la2a.Y, ta2leeb_ma3la2a.Width, ta2leeb_ma3la2a.Height);
             g.DrawImage(ta2leeb_shoka.Image, ta2leeb_shoka.X, ta2leeb_shoka.Y, ta2leeb_shoka.Width, ta2leeb_shoka.Height);
 
             g.DrawImage(mafrash.Image, mafrash.X, mafrash.Y, mafrash.Width, mafrash.Height);
@@ -202,15 +243,7 @@ namespace HCI
 
             g.DrawImage(board.Image, board.X, board.Y, board.Width, board.Height);
             g.DrawImage(knife.Image, knife.X, knife.Y, knife.Width, knife.Height);
-
-
-
-
-
-
-
             pen.Dispose();
-
         }
 
         // The function responsible for double buffering
