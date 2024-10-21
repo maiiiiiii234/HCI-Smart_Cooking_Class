@@ -1,4 +1,3 @@
-
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,7 +8,6 @@ using System.Threading;
 using System.IO;
 using System.Drawing.Drawing2D;
 using TUIO;
-
 	public class TuioDemo : Form , TuioListener
 {
     Bitmap off;
@@ -88,31 +86,48 @@ using TUIO;
 		private Dictionary<long,TuioObject> objectList;
 		private Dictionary<long,TuioCursor> cursorList;
 		private Dictionary<long,TuioBlob> blobList;
+=======
+public class TuioDemo : Form, TuioListener
+{
+    private TuioClient client;
+    private Dictionary<long, TuioObject> objectList;
+    private Dictionary<long, TuioCursor> cursorList;
+    private Dictionary<long, TuioBlob> blobList;
+>>>>>>> Stashed changes
 
-		public static int width, height;
-		private int window_width =  640;
-		private int window_height = 480;
-		private int window_left = 0;
-		private int window_top = 0;
-		private int screen_width = Screen.PrimaryScreen.Bounds.Width;
-		private int screen_height = Screen.PrimaryScreen.Bounds.Height;
-	    public string objectImagePath;
-		public string backgroundImagePath;
-	    public int fire = -1 , fireID=0,KnifeID=1,ChickenID=2,chknflag=0;
-		public	TuioObject knifeObject;
-		public  TuioObject chickenObject;
+    public static int width, height;
+    private int window_width = 640;
+    private int window_height = 480;
+    private int window_left = 0;
+    private int window_top = 0;
+    private int screen_width = Screen.PrimaryScreen.Bounds.Width;
+    private int screen_height = Screen.PrimaryScreen.Bounds.Height;
+    public string objectImagePath;
+    public string backgroundImagePath;
+    public int fire = -1, fireID = 0, KnifeID = 1, ChickenID = 2, foodID = 4, SpoonID = 3, chknflag = 0, stir = 0;
+    public TuioObject knifeObject;
+    public TuioObject chickenObject;
+    public TuioObject spoonObject;
+    public TuioObject foodObject;
 
-	    private bool fullscreen;
-		private bool verbose;
+    private bool fullscreen;
+    private bool verbose;
 
-		Font font = new Font("Arial", 10.0f);
-		SolidBrush fntBrush = new SolidBrush(Color.White);
-		SolidBrush bgrBrush = new SolidBrush(Color.FromArgb(0,0,64));
-		SolidBrush curBrush = new SolidBrush(Color.FromArgb(192, 0, 192));
-		SolidBrush objBrush = new SolidBrush(Color.FromArgb(64, 0, 0));
-		SolidBrush blbBrush = new SolidBrush(Color.FromArgb(64, 64, 64));
-		Pen curPen = new Pen(new SolidBrush(Color.Blue), 1);
+    Font font = new Font("Arial", 10.0f);
+    SolidBrush fntBrush = new SolidBrush(Color.White);
+    SolidBrush bgrBrush = new SolidBrush(Color.FromArgb(0, 0, 64));
+    SolidBrush curBrush = new SolidBrush(Color.FromArgb(192, 0, 192));
+    SolidBrush objBrush = new SolidBrush(Color.FromArgb(64, 0, 0));
+    SolidBrush blbBrush = new SolidBrush(Color.FromArgb(64, 64, 64));
+    Pen curPen = new Pen(new SolidBrush(Color.Blue), 1);
+    public int ct = 0;
+    public float initial_x;
+    float initialRelativeX = 0;
+    bool isStirring = false;
+    public TuioDemo(int port)
+    {
 
+<<<<<<< Updated upstream
 		public TuioDemo(int port) {
 		
 			verbose = false;
@@ -133,18 +148,25 @@ using TUIO;
 			
 			this.Closing+=new CancelEventHandler(Form_Closing);
 			this.KeyDown+=new KeyEventHandler(Form_KeyDown);
+=======
+        verbose = false;
+        fullscreen = false;
+        width = window_width;
+        height = window_height;
 
-			this.SetStyle( ControlStyles.AllPaintingInWmPaint |
-							ControlStyles.UserPaint |
-							ControlStyles.DoubleBuffer, true);
+        this.ClientSize = new System.Drawing.Size(width, height);
+        this.Name = "TuioDemo";
+        this.Text = "TuioDemo";
+>>>>>>> Stashed changes
 
-			objectList = new Dictionary<long,TuioObject>(128);
-			cursorList = new Dictionary<long,TuioCursor>(128);
-			blobList   = new Dictionary<long,TuioBlob>(128);
-			
-			client = new TuioClient(port);
-			client.addTuioListener(this);
+        this.Closing += new CancelEventHandler(Form_Closing);
+        this.KeyDown += new KeyEventHandler(Form_KeyDown);
 
+        this.SetStyle(ControlStyles.AllPaintingInWmPaint |
+                        ControlStyles.UserPaint |
+                        ControlStyles.DoubleBuffer, true);
+
+<<<<<<< Updated upstream
 			client.connect();
 		}
 		private void TuioDemo_Paint(object sender, PaintEventArgs e)
@@ -162,176 +184,149 @@ using TUIO;
         einElKbera.Y = this.Height - 183;
         einElKbera.img = new Bitmap("3eenElbotagaz45.png");
     }
+=======
+        objectList = new Dictionary<long, TuioObject>(128);
+        cursorList = new Dictionary<long, TuioCursor>(128);
+        blobList = new Dictionary<long, TuioBlob>(128);
+>>>>>>> Stashed changes
 
-		private void Form_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e) {
+        client = new TuioClient(port);
+        client.addTuioListener(this);
 
- 			if ( e.KeyData == Keys.F1) {
-	 			if (fullscreen == false) {
+        client.connect();
+    }
 
-					width = screen_width;
-					height = screen_height;
+    private void Form_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+    {
 
-					window_left = this.Left;
-					window_top = this.Top;
+        if (e.KeyData == Keys.F1)
+        {
+            if (fullscreen == false)
+            {
 
-					this.FormBorderStyle = FormBorderStyle.None;
-		 			this.Left = 0;
-		 			this.Top = 0;
-		 			this.Width = screen_width;
-		 			this.Height = screen_height;
+                width = screen_width;
+                height = screen_height;
 
-		 			fullscreen = true;
-	 			} else {
+                window_left = this.Left;
+                window_top = this.Top;
 
-					width = window_width;
-					height = window_height;
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.Left = 0;
+                this.Top = 0;
+                this.Width = screen_width;
+                this.Height = screen_height;
 
-		 			this.FormBorderStyle = FormBorderStyle.Sizable;
-		 			this.Left = window_left;
-		 			this.Top = window_top;
-		 			this.Width = window_width;
-		 			this.Height = window_height;
-
-		 			fullscreen = false;
-	 			}
- 			} else if ( e.KeyData == Keys.Escape) {
-				this.Close();
-
- 			} else if ( e.KeyData == Keys.V ) {
- 				verbose=!verbose;
- 			}
-
- 		}
-
-		private void Form_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			client.removeTuioListener(this);
-
-			client.disconnect();
-			System.Environment.Exit(0);
-		}
-
-		public void addTuioObject(TuioObject o) {
-			lock(objectList) {
-				objectList.Add(o.SessionID,o);
-			} if (verbose) Console.WriteLine("add obj "+o.SymbolID+" ("+o.SessionID+") "+o.X+" "+o.Y+" "+o.Angle);
-		}
-
-		public void updateTuioObject(TuioObject o) {
-
-		if(o.SymbolID==fireID)
-        { 
-		// Convert the angle from radians to degrees
-		double angleInDegrees = o.Angle * (180.0 / Math.PI);
-
-		// Normalize the angle (ensure it's between 0 and 360 degrees)
-		if (angleInDegrees < 0) angleInDegrees += 360;
-
-		// Flag to detect if the object is rotated near 90 degrees
-		bool rotatedRight = (Math.Abs(angleInDegrees - 90) < 5);
-
-		// Flag to detect if the object is rotated back to 0 degrees
-		bool rotatedToZero = (Math.Abs(angleInDegrees - 0) < 5 || Math.Abs(angleInDegrees - 360) < 5);
-
-		// Set the fire flag based on the rotation state
-		if (rotatedRight)
-		{
-			if (o.SymbolID == 0)
-			{
-				fire = 1;  // Set fire flag to 1 when rotated to the right (90 degrees)
-				Console.WriteLine("Fire ON - Object rotated to the right (90 degrees)");
-			}
-		}
-		else if (rotatedToZero)
-		{
-			if (o.SymbolID == 0)
-			{
-				fire = 0;  // Set fire flag to 1 when rotated to the right (90 degrees)
-				Console.WriteLine("Fire ON - Object rotated to the right (90 degrees)");
-			}
-		}
-		}
-
-	 	if (o.SymbolID == KnifeID) {
-              knifeObject = o;
-         }
-        if (o.SymbolID == ChickenID) {
-            chickenObject = o;
-        }
-     
-        if (knifeObject != null && chickenObject != null) {
-            checkKnifeSlicing(knifeObject, chickenObject);
-        }
-
-		if (verbose) Console.WriteLine("set obj "+o.SymbolID+" "+o.SessionID+" "+o.X+" "+o.Y+" "+o.Angle+" "+o.MotionSpeed+" "+o.RotationSpeed+" "+o.MotionAccel+" "+o.RotationAccel);
-		}
-	    public void checkKnifeSlicing(TuioObject knife, TuioObject chicken) {
- 
-          float xrange = 0.05f; 
-          float yrange = 0.05f;
-
-        // slice vertically
-        if (Math.Abs(knife.X - chicken.X) < xrange) {
-
-            if ( Math.Abs(knife.Y - chicken.Y)<yrange) {
-                // Knife has "sliced" the chicken
-                Console.WriteLine("Chicken sliced!");
-	     			chknflag=1;
-                
+                fullscreen = true;
             }
+            else
+            {
+
+                width = window_width;
+                height = window_height;
+
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.Left = window_left;
+                this.Top = window_top;
+                this.Width = window_width;
+                this.Height = window_height;
+
+                fullscreen = false;
+            }
+        }
+        else if (e.KeyData == Keys.Escape)
+        {
+            this.Close();
+
+        }
+        else if (e.KeyData == Keys.V)
+        {
+            verbose = !verbose;
         }
 
     }
 
+    private void Form_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        client.removeTuioListener(this);
 
-		public void removeTuioObject(TuioObject o) {
-			lock(objectList) {
-				objectList.Remove(o.SessionID);
-			}
-			if (verbose) Console.WriteLine("del obj "+o.SymbolID+" ("+o.SessionID+")");
-		}
+        client.disconnect();
+        System.Environment.Exit(0);
+    }
 
-		public void addTuioCursor(TuioCursor c) {
-			lock(cursorList) {
-				cursorList.Add(c.SessionID,c);
-			}
-			if (verbose) Console.WriteLine("add cur "+c.CursorID + " ("+c.SessionID+") "+c.X+" "+c.Y);
-		}
+    public void addTuioObject(TuioObject o)
+    {
+        lock (objectList)
+        {
+            objectList.Add(o.SessionID, o);
+        }
 
-		public void updateTuioCursor(TuioCursor c) {
-			if (verbose) Console.WriteLine("set cur "+c.CursorID + " ("+c.SessionID+") "+c.X+" "+c.Y+" "+c.MotionSpeed+" "+c.MotionAccel);
-		}
+        if (verbose) Console.WriteLine("add obj " + o.SymbolID + " (" + o.SessionID + ") " + o.X + " " + o.Y + " " + o.Angle);
+    }
 
-		public void removeTuioCursor(TuioCursor c) {
-			lock(cursorList) {
-				cursorList.Remove(c.SessionID);
-			}
-			if (verbose) Console.WriteLine("del cur "+c.CursorID + " ("+c.SessionID+")");
- 		}
+    public void updateTuioObject(TuioObject o)
+    {
+        if (o.SymbolID == SpoonID)
+        {
+            initial_x = o.X;
+        }
+        if (o.SymbolID == fireID)
+        {
+            // Convert the angle from radians to degrees
+            double angleInDegrees = o.Angle * (180.0 / Math.PI);
 
-		public void addTuioBlob(TuioBlob b) {
-			lock(blobList) {
-				blobList.Add(b.SessionID,b);
-			}
-			if (verbose) Console.WriteLine("add blb "+b.BlobID + " ("+b.SessionID+") "+b.X+" "+b.Y+" "+b.Angle+" "+b.Width+" "+b.Height+" "+b.Area);
-		}
+            // Normalize the angle (ensure it's between 0 and 360 degrees)
+            if (angleInDegrees < 0) angleInDegrees += 360;
 
-		public void updateTuioBlob(TuioBlob b) {
-		
-			if (verbose) Console.WriteLine("set blb "+b.BlobID + " ("+b.SessionID+") "+b.X+" "+b.Y+" "+b.Angle+" "+b.Width+" "+b.Height+" "+b.Area+" "+b.MotionSpeed+" "+b.RotationSpeed+" "+b.MotionAccel+" "+b.RotationAccel);
-		}
+            // Flag to detect if the object is rotated near 90 degrees
+            bool rotatedRight = (Math.Abs(angleInDegrees - 90) < 5);
 
-		public void removeTuioBlob(TuioBlob b) {
-			lock(blobList) {
-				blobList.Remove(b.SessionID);
-			}
-			if (verbose) Console.WriteLine("del blb "+b.BlobID + " ("+b.SessionID+")");
-		}
+            // Flag to detect if the object is rotated back to 0 degrees
+            bool rotatedToZero = (Math.Abs(angleInDegrees - 0) < 5 || Math.Abs(angleInDegrees - 360) < 5);
 
-		public void refresh(TuioTime frameTime) {
-			Invalidate();
-		}
+            // Set the fire flag based on the rotation state
+            if (rotatedRight)
+            {
+                if (o.SymbolID == 0)
+                {
+                    fire = 1;  // Set fire flag to 1 when rotated to the right (90 degrees)
+                    Console.WriteLine("Fire ON - Object rotated to the right (90 degrees)");
+                }
+            }
+            else if (rotatedToZero)
+            {
+                if (o.SymbolID == 0)
+                {
+                    fire = 0;  // Set fire flag to 1 when rotated to the right (90 degrees)
+                    Console.WriteLine("Fire ON - Object rotated to the right (90 degrees)");
+                }
+            }
+        }
+        if (o.SymbolID == KnifeID)
+        {
+            knifeObject = o;
+        }
+        if (o.SymbolID == ChickenID)
+        {
+            chickenObject = o;
+        }
+        if (o.SymbolID == SpoonID)
+        {
+            spoonObject = o;
+        }
+        if (o.SymbolID == foodID)
+        {
+            foodObject = o;
+        }
+        if (knifeObject != null && chickenObject != null)
+        {
+            checkKnifeSlicing(knifeObject, chickenObject);
+        }
+        if (spoonObject != null && foodObject != null)
+        {
+            float xx = 0.5f;
+            float yy = 0.5f;
 
+<<<<<<< Updated upstream
 		protected override void OnPaintBackground(PaintEventArgs pevent)//drawscene
 		{
 			// Getting the graphics object
@@ -356,18 +351,20 @@ using TUIO;
 			 foreach (TuioCursor tcur in cursorList.Values) {
 					List<TuioPoint> path = tcur.Path;
 					TuioPoint current_point = path[0];
+=======
+            if (Math.Abs(spoonObject.X - foodObject.X) < xx)
+            {
+                if (Math.Abs(spoonObject.Y - foodObject.Y) < yy)
+                {
+                    double angleInDegrees = o.Angle * (180.0 / Math.PI);
 
-					for (int i = 0; i < path.Count; i++) {
-						TuioPoint next_point = path[i];
-						g.DrawLine(curPen, current_point.getScreenX(width), current_point.getScreenY(height), next_point.getScreenX(width), next_point.getScreenY(height));
-						current_point = next_point;
-					}
-					g.FillEllipse(curBrush, current_point.getScreenX(width) - height / 100, current_point.getScreenY(height) - height / 100, height / 50, height / 50);
-					g.DrawString(tcur.CursorID + "", font, fntBrush, new PointF(tcur.getScreenX(width) - 10, tcur.getScreenY(height) - 10));
-				}
-			}
-		 }
+                    if (angleInDegrees < 0) angleInDegrees += 360;
+>>>>>>> Stashed changes
 
+                    bool rotated1 = (Math.Abs(angleInDegrees - 90) < 5);
+                    bool rotated2 = (Math.Abs(angleInDegrees - 180) < 5);
+
+<<<<<<< Updated upstream
 			// draw the objects
 			if (objectList.Count > 0) {
  				lock(objectList) {
@@ -389,9 +386,164 @@ using TUIO;
 								objectImagePath = Path.Combine(Environment.CurrentDirectory, "chkn.jfif");
 							}
                             else if(chknflag==1)
+=======
+                    if (rotated1)
+                    {
+                        if (o.SymbolID == 3)
+                        {
+                            stir = 1;
+                        }
+                    }
+                    if (rotated2)
+                    {
+                        if (o.SymbolID == 3)
+                        {
+                            stir = 2;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        if (verbose) Console.WriteLine("set obj " + o.SymbolID + " " + o.SessionID + " " + o.X + " " + o.Y + " " + o.Angle + " " + o.MotionSpeed + " " + o.RotationSpeed + " " + o.MotionAccel + " " + o.RotationAccel);
+    }
+    public void checkKnifeSlicing(TuioObject knife, TuioObject chicken)
+    {
+        float xrange = 0.05f;
+        float yrange = 0.05f;
+
+        // slice vertically
+        if (Math.Abs(knife.X - chicken.X) < xrange)
+        {
+            if (Math.Abs(knife.Y - chicken.Y) < yrange)
+            {
+                // Knife has "sliced" the chicken
+                Console.WriteLine("Chicken sliced!");
+                chknflag = 1;
+            }
+        }
+    }
+
+    public void removeTuioObject(TuioObject o)
+    {
+        lock (objectList)
+        {
+            objectList.Remove(o.SessionID);
+        }
+        if (verbose) Console.WriteLine("del obj " + o.SymbolID + " (" + o.SessionID + ")");
+    }
+
+    public void addTuioCursor(TuioCursor c)
+    {
+        lock (cursorList)
+        {
+            cursorList.Add(c.SessionID, c);
+        }
+        if (verbose) Console.WriteLine("add cur " + c.CursorID + " (" + c.SessionID + ") " + c.X + " " + c.Y);
+    }
+
+    public void updateTuioCursor(TuioCursor c)
+    {
+        if (verbose) Console.WriteLine("set cur " + c.CursorID + " (" + c.SessionID + ") " + c.X + " " + c.Y + " " + c.MotionSpeed + " " + c.MotionAccel);
+    }
+
+    public void removeTuioCursor(TuioCursor c)
+    {
+        lock (cursorList)
+        {
+            cursorList.Remove(c.SessionID);
+        }
+        if (verbose) Console.WriteLine("del cur " + c.CursorID + " (" + c.SessionID + ")");
+    }
+
+    public void addTuioBlob(TuioBlob b)
+    {
+        lock (blobList)
+        {
+            blobList.Add(b.SessionID, b);
+        }
+        if (verbose) Console.WriteLine("add blb " + b.BlobID + " (" + b.SessionID + ") " + b.X + " " + b.Y + " " + b.Angle + " " + b.Width + " " + b.Height + " " + b.Area);
+    }
+
+    public void updateTuioBlob(TuioBlob b)
+    {
+
+        if (verbose) Console.WriteLine("set blb " + b.BlobID + " (" + b.SessionID + ") " + b.X + " " + b.Y + " " + b.Angle + " " + b.Width + " " + b.Height + " " + b.Area + " " + b.MotionSpeed + " " + b.RotationSpeed + " " + b.MotionAccel + " " + b.RotationAccel);
+    }
+
+    public void removeTuioBlob(TuioBlob b)
+    {
+        lock (blobList)
+        {
+            blobList.Remove(b.SessionID);
+        }
+        if (verbose) Console.WriteLine("del blb " + b.BlobID + " (" + b.SessionID + ")");
+    }
+
+    public void refresh(TuioTime frameTime)
+    {
+        Invalidate();
+    }
+
+    protected override void OnPaintBackground(PaintEventArgs pevent)
+    {
+        Graphics g = pevent.Graphics;
+
+        g.FillRectangle(bgrBrush, new Rectangle(0, 0, width, height));
+        backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "kitback.jpg");
+        if (File.Exists(backgroundImagePath))
+        {
+            using (Image bgImage = Image.FromFile(backgroundImagePath))
+            {
+                g.DrawImage(bgImage, new Rectangle(new Point(0, 0), new Size(width, height)));
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Background image not found: {backgroundImagePath}");
+        }
+        // draw the cursor path
+        if (cursorList.Count > 0)
+        {
+            lock (cursorList)
+            {
+                foreach (TuioCursor tcur in cursorList.Values)
+                {
+                    List<TuioPoint> path = tcur.Path;
+                    TuioPoint current_point = path[0];
+
+                    for (int i = 0; i < path.Count; i++)
+                    {
+                        TuioPoint next_point = path[i];
+                        g.DrawLine(curPen, current_point.getScreenX(width), current_point.getScreenY(height), next_point.getScreenX(width), next_point.getScreenY(height));
+                        current_point = next_point;
+                    }
+                    g.FillEllipse(curBrush, current_point.getScreenX(width) - height / 100, current_point.getScreenY(height) - height / 100, height / 50, height / 50);
+                    g.DrawString(tcur.CursorID + "", font, fntBrush, new PointF(tcur.getScreenX(width) - 10, tcur.getScreenY(height) - 10));
+                }
+            }
+        }
+
+        // draw the objects
+        if (objectList.Count > 0)
+        {
+            lock (objectList)
+            {
+                foreach (TuioObject tobj in objectList.Values)
+                {
+                    int ox = tobj.getScreenX(width);
+                    int oy = tobj.getScreenY(height);
+                    int size = height / 10;
+                    switch (tobj.SymbolID)
+                    {
+                        case 4:
+                            if (stir == 0)
+>>>>>>> Stashed changes
                             {
-								objectImagePath = Path.Combine(Environment.CurrentDirectory, "slicedChkn.jfif");
+                                objectImagePath = Path.Combine(Environment.CurrentDirectory, "1.png");
                             }
+<<<<<<< Updated upstream
 							break;
                         case 3: //spoon5ashab
 
@@ -443,6 +595,36 @@ using TUIO;
 
 						case 22: //plate
 
+=======
+                            else if (stir == 1)
+                            {
+                                objectImagePath = Path.Combine(Environment.CurrentDirectory, "2.png");
+                            }
+                            else if (stir == 2)
+                            {
+                                objectImagePath = Path.Combine(Environment.CurrentDirectory, "3.png");
+                            }
+                            break;
+                        case 3:
+                            objectImagePath = Path.Combine(Environment.CurrentDirectory, "spoon.jpg");
+                            break;
+                        case 2:
+                            if (chknflag == 0)
+                            {
+                                objectImagePath = Path.Combine(Environment.CurrentDirectory, "chkn.jpg");
+                            }
+                            else if (chknflag == 1)
+                            {
+                                objectImagePath = Path.Combine(Environment.CurrentDirectory, "slicedChkn.jpg");
+                            }
+                            break;
+                        case 1:
+                            objectImagePath = Path.Combine(Environment.CurrentDirectory, "knife.jpg");
+                            break;
+                        case 0:
+                            objectImagePath = Path.Combine(Environment.CurrentDirectory, "firepic.jpg");
+                            break;
+>>>>>>> Stashed changes
                         default:
                             // Use default rectangle for other IDs
                             g.FillRectangle(objBrush, new Rectangle(ox - size / 2, oy - size / 2, size, size));
@@ -450,99 +632,97 @@ using TUIO;
                             continue;
                     }
 
-					try
-					{
+                    try
+                    {
 
 
-						// Draw object image with rotation
-						if (File.Exists(objectImagePath) )
-						{
-							using (Image objectImage = Image.FromFile(objectImagePath))
-							{
-								if (fire == 1 && tobj.SymbolID==fireID)
-								{
-									// Save the current state of the graphics object
-									GraphicsState state = g.Save();
+                        // Draw object image with rotation
+                        if (File.Exists(objectImagePath))
+                        {
+                            using (Image objectImage = Image.FromFile(objectImagePath))
+                            {
+                                if (fire == 1 && tobj.SymbolID == fireID)
+                                {
+                                    // Save the current state of the graphics object
+                                    GraphicsState state = g.Save();
 
-									// Apply transformations for rotation
-									g.TranslateTransform(ox, oy);
-									g.RotateTransform((float)(tobj.Angle / Math.PI * 180.0f));
-									g.TranslateTransform(-ox, -oy);
+                                    // Apply transformations for rotation
+                                    g.TranslateTransform(ox, oy);
+                                    g.RotateTransform((float)(tobj.Angle / Math.PI * 180.0f));
+                                    g.TranslateTransform(-ox, -oy);
 
-									// Draw the rotated object
-									g.DrawImage(objectImage, new Rectangle(ox - size / 2, oy - size / 2, size, size));
+                                    // Draw the rotated object
+                                    g.DrawImage(objectImage, new Rectangle(ox - size / 2, oy - size / 2, size, size));
 
-									// Restore the graphics state
-									g.Restore(state);
-								}
-                                else if(tobj.SymbolID != fireID)
+                                    // Restore the graphics state
+                                    g.Restore(state);
+                                }
+                                else if (tobj.SymbolID != fireID)
 
                                 {
-									// Save the current state of the graphics object
-									GraphicsState state = g.Save();
+                                    // Save the current state of the graphics object
+                                    GraphicsState state = g.Save();
 
-									// Apply transformations for rotation
-									g.TranslateTransform(ox, oy);
-									g.RotateTransform((float)(tobj.Angle / Math.PI * 180.0f));
-									g.TranslateTransform(-ox, -oy);
+                                    // Apply transformations for rotation
+                                    g.TranslateTransform(ox, oy);
+                                    g.RotateTransform((float)(tobj.Angle / Math.PI * 180.0f));
+                                    g.TranslateTransform(-ox, -oy);
 
-									// Draw the rotated object
-									g.DrawImage(objectImage, new Rectangle(ox - size / 2, oy - size / 2, size, size));
+                                    // Draw the rotated object
+                                    g.DrawImage(objectImage, new Rectangle(ox - size / 2, oy - size / 2, size, size));
 
-									// Restore the graphics state
-									g.Restore(state);
-								}
-							}
-						}
-						else
-						{
-							Console.WriteLine($"Object image not found: {objectImagePath}");
-							// Fall back to drawing a rectangle
-							g.FillRectangle(objBrush, new Rectangle(ox - size / 2, oy - size / 2, size, size));
-						}
-					}
+                                    // Restore the graphics state
+                                    g.Restore(state);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Object image not found: {objectImagePath}");
+                            // Fall back to drawing a rectangle
+                            g.FillRectangle(objBrush, new Rectangle(ox - size / 2, oy - size / 2, size, size));
+                        }
+                    }
                     catch { }
 
-						//g.TranslateTransform(ox, oy);
-						//g.RotateTransform((float)(tobj.Angle / Math.PI * 180.0f));
-						//g.TranslateTransform(-ox, -oy);
+                    //g.TranslateTransform(ox, oy);
+                    //g.RotateTransform((float)(tobj.Angle / Math.PI * 180.0f));
+                    //g.TranslateTransform(-ox, -oy);
 
-						//g.FillRectangle(objBrush, new Rectangle(ox - size / 2, oy - size / 2, size, size));
+                    //g.FillRectangle(objBrush, new Rectangle(ox - size / 2, oy - size / 2, size, size));
 
-						//g.TranslateTransform(ox, oy);
-						//g.RotateTransform(-1 * (float)(tobj.Angle / Math.PI * 180.0f));
-						//g.TranslateTransform(-ox, -oy);
+                    //g.TranslateTransform(ox, oy);
+                    //g.RotateTransform(-1 * (float)(tobj.Angle / Math.PI * 180.0f));
+                    //g.TranslateTransform(-ox, -oy);
 
-						//g.DrawString(tobj.SymbolID + "", font, fntBrush, new PointF(ox - 10, oy - 10));
-					}
-				}
-			}
+                    //g.DrawString(tobj.SymbolID + "", font, fntBrush, new PointF(ox - 10, oy - 10));
+                }
+            }
+        }
 
-			// draw the blobs
-			if (blobList.Count > 0) {
-				lock(blobList) {
-					foreach (TuioBlob tblb in blobList.Values) {
-						int bx = tblb.getScreenX(width);
-						int by = tblb.getScreenY(height);
-						float bw = tblb.Width*width;
-						float bh = tblb.Height*height;
+        // draw the blobs
+        if (blobList.Count > 0)
+        {
+            lock (blobList)
+            {
+                foreach (TuioBlob tblb in blobList.Values)
+                {
+                    int bx = tblb.getScreenX(width);
+                    int by = tblb.getScreenY(height);
+                    float bw = tblb.Width * width;
+                    float bh = tblb.Height * height;
 
-						g.TranslateTransform(bx, by);
-						g.RotateTransform((float)(tblb.Angle / Math.PI * 180.0f));
-						g.TranslateTransform(-bx, -by);
+                    g.TranslateTransform(bx, by);
+                    g.RotateTransform((float)(tblb.Angle / Math.PI * 180.0f));
+                    g.TranslateTransform(-bx, -by);
 
-						g.FillEllipse(blbBrush, bx - bw / 2, by - bh / 2, bw, bh);
+                    g.FillEllipse(blbBrush, bx - bw / 2, by - bh / 2, bw, bh);
 
-						g.TranslateTransform(bx, by);
-						g.RotateTransform(-1 * (float)(tblb.Angle / Math.PI * 180.0f));
-						g.TranslateTransform(-bx, -by);
-						
-						g.DrawString(tblb.BlobID + "", font, fntBrush, new PointF(bx, by));
-					}
-				}
-			}
-		}
+                    g.TranslateTransform(bx, by);
+                    g.RotateTransform(-1 * (float)(tblb.Angle / Math.PI * 180.0f));
+                    g.TranslateTransform(-bx, -by);
 
+<<<<<<< Updated upstream
 		void DrawScene(Graphics g)
     {
         g.Clear(Color.White);
@@ -661,3 +841,33 @@ using TUIO;
 			Application.Run(app);
 		}
 	}
+=======
+                    g.DrawString(tblb.BlobID + "", font, fntBrush, new PointF(bx, by));
+                }
+            }
+        }
+    }
+
+    public static void Main(String[] argv)
+    {
+        int port = 0;
+        switch (argv.Length)
+        {
+            case 1:
+                port = int.Parse(argv[0], null);
+                if (port == 0) goto default;
+                break;
+            case 0:
+                port = 3333;
+                break;
+            default:
+                Console.WriteLine("usage: mono TuioDemo [port]");
+                System.Environment.Exit(0);
+                break;
+        }
+
+        TuioDemo app = new TuioDemo(port);
+        Application.Run(app);
+    }
+}
+>>>>>>> Stashed changes

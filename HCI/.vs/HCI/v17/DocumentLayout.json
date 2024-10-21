@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\CS MSA\\SEMSTER7\\CS484\\Hci proj\\HCI-Smart_Cooking_Class\\HCI\\",
+  "WorkspaceRootPath": "C:\\Users\\Mariam ziadi\\Downloads\\HCI Project\\HCI-Smart_Cooking_Class\\HCI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B02CBFBD-9430-487D-B408-D6E2224A6065}|HCI\\HCI.csproj|d:\\cs msa\\semster7\\cs484\\hci proj\\hci-smart_cooking_class\\hci\\hci\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B02CBFBD-9430-487D-B408-D6E2224A6065}|HCI\\HCI.csproj|c:\\users\\mariam ziadi\\downloads\\hci project\\hci-smart_cooking_class\\hci\\hci\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B02CBFBD-9430-487D-B408-D6E2224A6065}|HCI\\HCI.csproj|solutionrelative:hci\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B02CBFBD-9430-487D-B408-D6E2224A6065}|HCI\\HCI.csproj|D:\\CS MSA\\SEMSTER7\\CS484\\Hci proj\\HCI-Smart_Cooking_Class\\HCI\\hci\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{B02CBFBD-9430-487D-B408-D6E2224A6065}|HCI\\HCI.csproj|C:\\Users\\Mariam ziadi\\Downloads\\HCI Project\\HCI-Smart_Cooking_Class\\HCI\\hci\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{B02CBFBD-9430-487D-B408-D6E2224A6065}|HCI\\HCI.csproj|solutionrelative:hci\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -24,11 +24,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\CS MSA\\SEMSTER7\\CS484\\Hci proj\\HCI-Smart_Cooking_Class\\HCI\\HCI\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\Mariam ziadi\\Downloads\\HCI Project\\HCI-Smart_Cooking_Class\\HCI\\HCI\\Form1.cs",
               "RelativeDocumentMoniker": "HCI\\Form1.cs",
-              "ToolTip": "D:\\CS MSA\\SEMSTER7\\CS484\\Hci proj\\HCI-Smart_Cooking_Class\\HCI\\HCI\\Form1.cs",
+              "ToolTip": "C:\\Users\\Mariam ziadi\\Downloads\\HCI Project\\HCI-Smart_Cooking_Class\\HCI\\HCI\\Form1.cs",
               "RelativeToolTip": "HCI\\Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAANAAAAAAAAAA==",
+              "ViewState": "AQIAAIEAAAAAAAAAAAAYwCQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-18T11:30:56.066Z",
               "EditorCaption": ""
@@ -37,10 +37,9 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "D:\\CS MSA\\SEMSTER7\\CS484\\Hci proj\\HCI-Smart_Cooking_Class\\HCI\\HCI\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\Mariam ziadi\\Downloads\\HCI Project\\HCI-Smart_Cooking_Class\\HCI\\HCI\\Form1.cs",
               "RelativeDocumentMoniker": "HCI\\Form1.cs",
               "ToolTip": "D:\\CS MSA\\SEMSTER7\\CS484\\Hci proj\\HCI-Smart_Cooking_Class\\HCI\\HCI\\Form1.cs [Design]",
-              "RelativeToolTip": "HCI\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-18T11:30:56.531Z"
             }

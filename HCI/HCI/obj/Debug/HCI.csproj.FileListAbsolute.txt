@@ -30,3 +30,12 @@ D:\CS MSA\SEMSTER7\CS484\Hci proj\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.
 D:\CS MSA\SEMSTER7\CS484\Hci proj\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.exe
 D:\CS MSA\SEMSTER7\CS484\Hci proj\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.pdb
 >>>>>>> Stashed changes
+C:\Users\Mariam ziadi\Downloads\HCI Project\HCI-Smart_Cooking_Class\HCI\HCI\bin\Debug\HCI.exe.config
+C:\Users\Mariam ziadi\Downloads\HCI Project\HCI-Smart_Cooking_Class\HCI\HCI\bin\Debug\HCI.exe
+C:\Users\Mariam ziadi\Downloads\HCI Project\HCI-Smart_Cooking_Class\HCI\HCI\bin\Debug\HCI.pdb
+C:\Users\Mariam ziadi\Downloads\HCI Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.AssemblyReference.cache
+C:\Users\Mariam ziadi\Downloads\HCI Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.Properties.Resources.resources
+C:\Users\Mariam ziadi\Downloads\HCI Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.GenerateResource.cache
+C:\Users\Mariam ziadi\Downloads\HCI Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.csproj.CoreCompileInputs.cache
+C:\Users\Mariam ziadi\Downloads\HCI Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.exe
+C:\Users\Mariam ziadi\Downloads\HCI Project\HCI-Smart_Cooking_Class\HCI\HCI\obj\Debug\HCI.pdb
