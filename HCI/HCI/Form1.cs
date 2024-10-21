@@ -50,7 +50,6 @@ namespace HCI
         AinElbotagaz einElSo8ayara = new AinElbotagaz();
         AinElbotagaz einElKbera = new AinElbotagaz();
 
-
         public class AinElbotagaz
         {
             public int X, Y;
