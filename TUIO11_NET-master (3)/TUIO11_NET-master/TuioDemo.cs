@@ -116,9 +116,8 @@ public class TuioDemo : Form, TuioListener
     Pen curPen = new Pen(new SolidBrush(Color.Blue), 1);
     Form messageForm = new Form();
     Label messageLabel = new Label();
-    double checkXStart=0.460, checkXEnd=0.480;
-
-
+    double checkXStart=0.400, checkXEnd=0.450;
+    double checkXStart2 = 0.200, checkXEnd2 = 0.250;
 
     public TuioDemo(int port)
     {
@@ -180,7 +179,7 @@ public class TuioDemo : Form, TuioListener
 
         // Set up a timer to close the form after the specified duration
         timer = new System.Windows.Forms.Timer();
-        timer.Interval = 1000; // Convert to milliseconds
+        timer.Interval = 3*1000; // Convert to milliseconds
         timer.Tick += (sender, e) =>
         {
             messageForm.Close(); // Close the form
@@ -375,7 +374,7 @@ public class TuioDemo : Form, TuioListener
         }
         if (o.SymbolID == 7)//oil
         {
-            if (o.X <= checkXEnd && o.X >= checkXStart && stepFlag == 9)
+            if (o.X <= checkXEnd2 && o.X >= checkXStart2 && stepFlag == 9)
             {
                 stepFlag = 10;
                 this.Invoke((MethodInvoker)delegate
@@ -386,8 +385,9 @@ public class TuioDemo : Form, TuioListener
         }
         if (o.SymbolID == 2 && chknflag==1)//slicedshkn
         {
-            if (o.X <= checkXEnd && o.X >= checkXStart && stepFlag == 11)
+            if (o.X <= checkXEnd2 && o.X >= checkXStart2 && stepFlag == 11)
             {
+                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag11.jpg");
                 stepFlag = 12;
                 this.Invoke((MethodInvoker)delegate
                 {
@@ -397,7 +397,8 @@ public class TuioDemo : Form, TuioListener
         }
         if (o.SymbolID == 11)//milk
         {
-            if (o.X <= checkXEnd && o.X >= checkXStart && stepFlag == 12)
+
+            if (o.X <= checkXEnd2 && o.X >= checkXStart2 && stepFlag == 12)
             {
                 stepFlag = 13;
                 this.Invoke((MethodInvoker)delegate
@@ -408,7 +409,7 @@ public class TuioDemo : Form, TuioListener
         }
         if (o.SymbolID == 5)//butter
         {
-            if (o.X <= checkXEnd && o.X >= checkXStart && stepFlag == 13)
+            if (o.X <= checkXEnd2 && o.X >= checkXStart2 && stepFlag == 13)
             {
                 stepFlag = 14;
                 this.Invoke((MethodInvoker)delegate
@@ -419,7 +420,7 @@ public class TuioDemo : Form, TuioListener
         }
         if (o.SymbolID == 6)//mozza
         {
-            if (o.X <= checkXEnd && o.X >= checkXStart && stepFlag == 14)
+            if (o.X <= checkXEnd2&& o.X >= checkXStart2 && stepFlag == 14)
             {
                 stepFlag = 15;
                 this.Invoke((MethodInvoker)delegate
@@ -441,7 +442,7 @@ public class TuioDemo : Form, TuioListener
         }
         if (o.SymbolID == 13)//pan
         {
-            if (o.X <= checkXEnd && o.X >= checkXStart && stepFlag == 8)
+            if (o.X <= checkXEnd2 && o.X >= checkXStart2 && stepFlag == 8)
             {
                 stepFlag = 9;
                 this.Invoke((MethodInvoker)delegate
@@ -564,10 +565,10 @@ public class TuioDemo : Form, TuioListener
         {
             if (Math.Abs(knife.Y - chicken.Y) < yrange)
             {
+                stepFlag = 11;
                 // Knife has "sliced" the chicken
                 Console.WriteLine("Chicken sliced!");
                 chknflag = 1;
-                stepFlag = 11;
                 this.Invoke((MethodInvoker)delegate
                 {
                     ShowMessage("Step11: Put the chicken in the pan.");
@@ -643,21 +644,10 @@ public class TuioDemo : Form, TuioListener
         // Getting the graphics object
         Graphics g = pevent.Graphics;
         g.FillRectangle(bgrBrush, new Rectangle(0, 0, this.Width, this.Height));
-        backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "BG.jpg");
 
-        // Draw background image without rotation
-        if (File.Exists(backgroundImagePath))
-        {
-            using (Image bgImage = Image.FromFile(backgroundImagePath))
-            {
-                g.DrawImage(bgImage, new Rectangle(new Point(0, 0), new Size(this.Width, this.Height)));
-            }
+        //backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "BG.jpg");
+        
 
-        }
-        else
-        {
-            Console.WriteLine($"Background image not found: {backgroundImagePath}");
-        }
         // draw the cursor path
         if (cursorList.Count > 0)
         {
@@ -681,11 +671,27 @@ public class TuioDemo : Form, TuioListener
         }
         if (stepFlag == 0)
         {
+            backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "BG.jpg");
             stepFlag = 1;
             ShowMessage("Step1: Open the stove with the highest flame.");
         }
+        if (stepFlag == 16)
+        {
+            backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag16.jpg");
 
+        }
+        if (File.Exists(backgroundImagePath))
+        {
+            using (Image bgImage = Image.FromFile(backgroundImagePath))
+            {
+                g.DrawImage(bgImage, new Rectangle(new Point(0, 0), new Size(this.Width, this.Height)));
+            }
 
+        }
+        else
+        {
+            Console.WriteLine($"Background image not found: {backgroundImagePath}");
+        }
         // draw the objects
         if (objectList.Count > 0)
         {
@@ -701,6 +707,7 @@ public class TuioDemo : Form, TuioListener
                         case 0: //3ensoghyra
                             if (stepFlag == 7)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag6.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "3eenElbotagaz0.png");
                                 size = 150;
                                 sizeh = 250;
@@ -709,6 +716,7 @@ public class TuioDemo : Form, TuioListener
                         case 1: //knife
                             if (stepFlag==10)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag10.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "knife.png");
                                 size = 150;
                                 sizeh = 250;
@@ -717,6 +725,7 @@ public class TuioDemo : Form, TuioListener
                         case 2: //chicken
                             if (chknflag == 0 && stepFlag ==10)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag10.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "chicken breast.png");
                             }
                             else if (chknflag == 1)
@@ -748,6 +757,7 @@ public class TuioDemo : Form, TuioListener
                         case 5: //butter
                             if (stepFlag == 13)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag13.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "butterbs.png");
                                 size = 280;
                                 sizeh = 250;
@@ -756,6 +766,7 @@ public class TuioDemo : Form, TuioListener
                         case 6: //mozzrella
                             if (stepFlag == 14)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag14.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "gebna.png");
                                 size = 220;
                                 sizeh = 200;
@@ -764,6 +775,7 @@ public class TuioDemo : Form, TuioListener
                         case 7: //oil
                             if (stepFlag == 9)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag9.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "oil.png");
                                 size = 280;
                                 sizeh = 250;
@@ -772,6 +784,7 @@ public class TuioDemo : Form, TuioListener
                         case 8: //water
                             if (stepFlag == 3)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag3.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "water.png");
                                 size = 280;
                                 sizeh = 250;
@@ -780,6 +793,7 @@ public class TuioDemo : Form, TuioListener
                         case 9: //salt
                             if (stepFlag == 5)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag5.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "salt.png");
                                 size = 280;
                                 sizeh = 250;
@@ -788,6 +802,7 @@ public class TuioDemo : Form, TuioListener
                         case 10: //pepper
                             if (stepFlag == 6)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag6.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "pepper.png");
                                 size = 120;
                                 sizeh = 235;
@@ -796,6 +811,7 @@ public class TuioDemo : Form, TuioListener
                         case 11: //milk
                             if (stepFlag == 12)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag12.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "milk.png");
                                 size = 350;
                                 sizeh = 550;
@@ -804,6 +820,7 @@ public class TuioDemo : Form, TuioListener
                         case 12: //3eenKbera
                             if (stepFlag == 1)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "BG.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "3eenElbotagaz0.png");
                                 size = 150;
                                 sizeh = 250;
@@ -812,6 +829,14 @@ public class TuioDemo : Form, TuioListener
                         case 13: //tasa
                             if (stepFlag == 8 || stepFlag == 15)
                             {
+                                if(stepFlag == 8)
+                                {
+                                    backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag8.jpg");
+                                }
+                                if (stepFlag == 15)
+                                {
+                                    backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag15.jpg");
+                                }
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "tasa.png");
                                 size = 280;
                                 sizeh = 250;
@@ -821,6 +846,7 @@ public class TuioDemo : Form, TuioListener
                         case 14: //7ala
                             if (stepFlag == 2)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag2.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "7ala.png");
                                 size = 300;
                                 sizeh = 270;
@@ -829,6 +855,7 @@ public class TuioDemo : Form, TuioListener
                         case 15: //pasta
                             if (stepFlag == 4)
                             {
+                                backgroundImagePath = Path.Combine(Environment.CurrentDirectory, "stepflag4.jpg");
                                 objectImagePath = Path.Combine(Environment.CurrentDirectory, "pasta.png");
                                 size = 300;
                                 sizeh = 270;
@@ -842,6 +869,7 @@ public class TuioDemo : Form, TuioListener
                     }
                     try
                     {
+                        
                         // Draw object image with rotation
                         if (File.Exists(objectImagePath))
                         {
